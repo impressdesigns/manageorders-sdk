@@ -29,7 +29,7 @@ class Address(BaseModel):
 
     external_shipment_id: str | None = Field(None, serialization_alias="ExtShipID")
 
-    external_source: str | None = Field(None, serialization_alias="ShipMethod")
+    shipping_method: str | None = Field(None, serialization_alias="ShipMethod")
 
     company: str | None = Field(None, serialization_alias="ShipCompany")
     address1: str | None = Field(None, serialization_alias="ShipAddress01")
@@ -52,6 +52,7 @@ class Order(BaseModel):
 
     external_order_id: str = Field(serialization_alias="ExtOrderID")
     external_source: str = Field(serialization_alias="ExtSource")
+
     order_type: int = Field(serialization_alias="id_OrderType")
     employee_created_by: int = Field(serialization_alias="id_EmpCreatedBy")
     customer_id: int = Field(serialization_alias="id_Customer")
