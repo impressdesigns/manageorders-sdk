@@ -1,27 +1,41 @@
-"""ManageOrders API client."""
+"""Interacting with ManageOrders API."""
 
-from typing import Any
+from datetime import UTC, datetime, timedelta
+from typing import Any, Self
 
-from httpx import Client, Response
+import httpx
+from httpx import Response
 
 
 class ManageOrdersClient:
-    """ManageOrders API client."""
+    """A class wrapping interaction with ManageOrders API."""
 
     def __init__(
         self,
-        base_url: str,
-        client_id: str,
-        client_secret: str,
-        timeout: float,
+        username: str,
+        password: str,
     ) -> None:
         """Initialize the ManageOrdersClient class."""
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.client = Client(
-            base_url=base_url,
-            timeout=timeout,
-        )
+        self.base_url = "https://manageordersapi.com"
+        self.username = username
+        self.password = password
+        self.token = ""
+        self.token_expires_at = datetime.now(tz=UTC)
+
+    def _update_token(self: Self) -> None:
+        """Update the OAUTH token."""
+        if self.token_expires_at > datetime.now(tz=UTC):
+            return
+
+        auth_dict = {
+            "username": self.username,
+            "password": self.password,
+        }
+        response = httpx.post(f"{self.base_url}/v1/manageorders/signin", json=auth_dict)
+        response.raise_for_status()
+        data = response.json()
+        self.token = data["access_token"]
+        self.token_expires_at = datetime.now(tz=UTC) + timedelta(hours=1)
 
     def _make_request(
         self,
@@ -30,10 +44,15 @@ class ManageOrdersClient:
         params: dict[str, Any] | None = None,
         json: dict[str, Any] | None = None,
     ) -> Response:
-        """Make a request to ManageOrders."""
-        args: dict[str, str | dict[str, str]] = {
-            "url": path,
+        """Make a request to Core."""
+        self._update_token()
+
+        headers = {"Authorization": "Bearer " + self.token}
+
+        args = {
+            "url": self.base_url + path,
             "method": method,
+            "headers": headers,
         }
 
         if params is not None:
@@ -42,4 +61,4 @@ class ManageOrdersClient:
         if json is not None:
             args["json"] = json
 
-        return self.client.request(**args)  # type: ignore[arg-type]
+        return httpx.request(**args)  # type: ignore[arg-type]
