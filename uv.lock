@@ -347,8 +347,8 @@ wheels = [
 ]
 
 [[package]]
-name = "idi-manageorders-api"
-version = "0.1.0"
+name = "idi-manageorders-sdk"
+version = "0.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "httpx" },
