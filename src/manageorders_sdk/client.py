@@ -1,4 +1,4 @@
-"""Zendesk API client."""
+"""ManageOrders API client."""
 
 from typing import Any
 
