@@ -6,6 +6,8 @@ from typing import Any, Self
 import httpx
 from httpx import Response
 
+from .models import Order
+
 
 class ManageOrdersClient:
     """A class wrapping interaction with ManageOrders API."""
@@ -62,3 +64,10 @@ class ManageOrdersClient:
             args["json"] = json
 
         return httpx.request(**args)  # type: ignore[arg-type]
+
+    def upload_order(
+        self,
+        order: Order,
+    ) -> Response:
+        """Upload an order to ManageOrders."""
+        return self._make_request("POST", "/onsite/order-push", json=order.model_dump(by_alias=True, exclude_none=True))
