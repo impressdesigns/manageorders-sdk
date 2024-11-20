@@ -3,7 +3,7 @@ Changelog
 
 - :release:`0.3.0 <20th November 2024>`
 - :feature:`-` Add support for ``DesignIDBlock``
--
+
 - :release:`0.2.0 <19th November 2024>`
 - :feature:`-` Complete model definitions for the SDK
 
