@@ -108,6 +108,7 @@ class LinesOEItem(BaseModel):
     name_first: str | None = Field(None, serialization_alias="NameFirst")
     name_last: str | None = Field(None, serialization_alias="NameLast")
     line_item_notes: str | None = Field(None, serialization_alias="LineItemNotes")
+    design_id_block: str | None = Field(None, serialization_alias="DesignIDBlock")
     external_design_id_block: str | None = Field(None, serialization_alias="ExtDesignIDBlock")
     external_ship_id: str | None = Field(None, serialization_alias="ExtShipID")
 
