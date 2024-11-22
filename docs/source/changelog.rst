@@ -1,6 +1,9 @@
 Changelog
 =========
 
+- :release:`0.4.0 <22nd November 2024>`
+- :support:`-` Fix line item types
+
 - :release:`0.3.0 <20th November 2024>`
 - :feature:`-` Add support for ``DesignIDBlock``
 
