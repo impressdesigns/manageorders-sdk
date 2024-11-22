@@ -178,6 +178,7 @@ class Attachment(BaseModel):
 class Order(BaseModel):
     """Order model."""
 
+    api_source: str | None = Field(serialization_alias="APISource")
     external_order_id: str = Field(serialization_alias="ExtOrderID")
     external_source: str = Field(serialization_alias="ExtSource")
     external_customer_id: str | None = Field(None, serialization_alias="ExtCustomerID")
