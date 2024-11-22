@@ -1,6 +1,6 @@
 [project]
 name = "idi-manageorders-sdk"
-version = "0.3.0"
+version = "0.4.0"
 description = "ShopWorks ManageOrders API SDK"
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@impressdesigns.com" },
