@@ -98,7 +98,7 @@ class LinesOEItem(BaseModel):
     description: str | None = Field(None, serialization_alias="Description")
     size: str | None = Field(None, serialization_alias="Size")
     quantity: int | None = Field(None, serialization_alias="Qty")
-    price: int | None = Field(None, serialization_alias="Price")
+    price: float | None = Field(None, serialization_alias="Price")
     product_class_id: int | None = Field(None, serialization_alias="id_ProductClass")
     custom_field_1: str | None = Field(None, serialization_alias="CustomField01")
     custom_field_2: str | None = Field(None, serialization_alias="CustomField02")
