@@ -60,7 +60,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["core"]
+known-first-party = ["manageorders_sdk"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
