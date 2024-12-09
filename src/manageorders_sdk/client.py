@@ -36,7 +36,7 @@ class ManageOrdersClient:
         response = httpx.post(f"{self.base_url}/v1/manageorders/signin", json=auth_dict)
         response.raise_for_status()
         data = response.json()
-        self.token = data["access_token"]
+        self.token = data["id_token"]
         self.token_expires_at = datetime.now(tz=UTC) + timedelta(hours=1)
 
     def _make_request(
