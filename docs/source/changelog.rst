@@ -1,6 +1,11 @@
 Changelog
 =========
 
+- :release:`0.6.0 <9th December 2024>`
+- :bug:`-` Use ``id_token`` instead of ``access_token`` for authentication
+- :bug:`-` Add date validation to date fields in ``Order``
+- :bug:`-` Change price field to be float in ``LinesOEItem``
+
 - :release:`0.5.0 <22nd November 2024>`
 - :feature:`-` Add ``API Source`` field to ``Order`` model
 
