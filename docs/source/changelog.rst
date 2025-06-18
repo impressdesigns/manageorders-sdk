@@ -1,6 +1,9 @@
 Changelog
 =========
 
+- :release:`0.7.0 <18th June 2025>`
+- :feature:`-` Add support for uploading tracking data
+
 - :release:`0.6.0 <9th December 2024>`
 - :bug:`-` Use ``id_token`` instead of ``access_token`` for authentication
 - :bug:`-` Add date validation to date fields in ``Order``

@@ -1,8 +1,9 @@
 """Models."""
 
+from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, FieldSerializationInfo, field_serializer
 
 DATE_REGEX = "[0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{2}"
 
@@ -210,3 +211,37 @@ class Order(BaseModel):
     payments: list[Payment] | None = Field(None, serialization_alias="Payments")
     addresses: list[ShippingAddress] | None = Field(None, serialization_alias="ShippingAddresses")
     attachments: list[Attachment] | None = Field(None, serialization_alias="Attachments")
+
+
+class Tracking(BaseModel):
+    """Tracking model."""
+
+    tracking: str = Field(serialization_alias="Tracking")
+
+    date_shipped: date = Field(serialization_alias="date_Shipped")
+
+    company: str = Field(serialization_alias="AddressCompany")
+    name: str = Field(serialization_alias="Name")
+
+    address1: str = Field(serialization_alias="Address01")
+    address2: str = Field(serialization_alias="Address02")
+    city: str = Field(serialization_alias="AddressCity")
+    state: str = Field(serialization_alias="AddressState")
+    postal_code: str = Field(serialization_alias="AddressZip")
+    country: str = Field(serialization_alias="AddressCountry")
+
+    cost: float = Field(serialization_alias="Cost")
+    weight: float = Field(serialization_alias="Weight")
+
+    @field_serializer("date_shipped")
+    def serialize_date_shipped(self, date_: date, _info: FieldSerializationInfo) -> str:
+        """Serialize date_shipped to string."""
+        return date_.strftime(r"%m/%d/%Y")
+
+
+class TrackingContainer(BaseModel):
+    """TrackingContainer model."""
+
+    api_source: str | None = Field(serialization_alias="APISource")
+    external_order_id: str = Field(serialization_alias="ExtOrderID")
+    tracking: Tracking = Field(serialization_alias="Tracking")
