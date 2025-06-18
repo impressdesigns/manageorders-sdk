@@ -6,7 +6,7 @@ from typing import Any, Self
 import httpx
 from httpx import Response
 
-from .models import Order
+from .models import Order, TrackingContainer
 
 
 class ManageOrdersClient:
@@ -71,3 +71,10 @@ class ManageOrdersClient:
     ) -> Response:
         """Upload an order to ManageOrders."""
         return self._make_request("POST", "/onsite/order-push", json=order.model_dump(by_alias=True, exclude_none=True))
+
+    def upload_tracking(
+        self,
+        tracking_data: TrackingContainer,
+    ) -> Response:
+        """Upload tracking data to ManageOrders."""
+        return self._make_request("POST", "/onsite/track-push", json=tracking_data.model_dump(by_alias=True, exclude_none=True))
