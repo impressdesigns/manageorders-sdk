@@ -1,6 +1,9 @@
 Changelog
 =========
 
+- :release:`0.8.0 <27th June 2025>`
+- :feature:`-` Make date fields actual date types
+
 - :release:`0.7.0 <18th June 2025>`
 - :feature:`-` Add support for uploading tracking data
 
