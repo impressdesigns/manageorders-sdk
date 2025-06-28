@@ -1,11 +1,11 @@
 """Models."""
 
 from datetime import date
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, Field, FieldSerializationInfo, field_serializer
+from pydantic import BaseModel, Field, FieldSerializationInfo, PlainSerializer, field_serializer
 
-DATE_REGEX = "[0-9]{2}/[0-9]{2}/[0-9]{4}|[0-9]{2}"
+Date = Annotated[date, PlainSerializer(lambda value: value.strftime(r"%m/%d/%Y"))]
 
 
 class Customer(BaseModel):
@@ -20,10 +20,10 @@ class Customer(BaseModel):
     tax_exempt: Literal[0, 1] | None = Field(None, serialization_alias="TaxExempt")
     tax_exempt_number: str | None = Field(None, serialization_alias="TaxExemptNumber")
     website: str | None = Field(None, serialization_alias="WebSite")
-    custom_date_field_1: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="CustomDateField01")
-    custom_date_field_2: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="CustomDateField02")
-    custom_date_field_3: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="CustomDateField03")
-    custom_date_field_4: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="CustomDateField04")
+    custom_date_field_1: Date | None = Field(None, serialization_alias="CustomDateField01")
+    custom_date_field_2: Date | None = Field(None, serialization_alias="CustomDateField02")
+    custom_date_field_3: Date | None = Field(None, serialization_alias="CustomDateField03")
+    custom_date_field_4: Date | None = Field(None, serialization_alias="CustomDateField04")
     custom_field_1: str | None = Field(None, serialization_alias="CustomField01")
     custom_field_2: str | None = Field(None, serialization_alias="CustomField02")
     custom_field_3: str | None = Field(None, serialization_alias="CustomField03")
@@ -184,9 +184,9 @@ class Order(BaseModel):
     external_source: str = Field(serialization_alias="ExtSource")
     external_customer_id: str | None = Field(None, serialization_alias="ExtCustomerID")
     external_customer_pref: str | None = Field(None, serialization_alias="ExtCustomerPref")
-    date_order_placed: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="date_OrderPlaced")
-    date_order_requested_to_ship: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="date_OrderRequestedToShip")
-    date_order_drop_dead: str | None = Field(None, pattern=DATE_REGEX, serialization_alias="date_OrderDropDead")
+    date_order_placed: Date | None = Field(None, serialization_alias="date_OrderPlaced")
+    date_order_requested_to_ship: Date | None = Field(None, serialization_alias="date_OrderRequestedToShip")
+    date_order_drop_dead: Date | None = Field(None, serialization_alias="date_OrderDropDead")
     order_type_id: int | None = Field(None, serialization_alias="id_OrderType")
     sales_status_id: int | None = Field(None, serialization_alias="id_SalesStatus")
     employee_created_by: int | None = Field(None, serialization_alias="id_EmpCreatedBy")
