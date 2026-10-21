@@ -18,7 +18,7 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 10a3015f97f5d9d9f4b49a64ac646253980879b2  # frozen: 0.9.25
+    rev: dd409d04a3fa4a50f918dddb3ad3c6d8f46ab2cd  # frozen: 0.13.4
     hooks:
       - id: uv-lock
 
