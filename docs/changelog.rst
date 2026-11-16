@@ -1,6 +1,11 @@
 Changelog
 =========
 
+- :feature:`-` Switch the HTTP client from httpx to niquests. Uploads return a :class:`niquests.Response`, a
+  failed sign-in raises :class:`niquests.HTTPError`, and ``ManageOrdersClient`` takes a ``timeout`` (five
+  seconds, as before)
+- :support:`-` Require Python 3.14, the floor the other Impress Designs SDKs already share
+
 - :release:`0.8.0 <27th June 2025>`
 - :feature:`-` Make date fields actual date types
 
